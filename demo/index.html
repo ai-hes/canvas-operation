@@ -1,0 +1,81 @@
+<html>
+<body>
+    <h1>Example Title</h1>
+    <hr>
+    <div id="console">Console</div>
+    <div id="mycontainer" style="width: 800px; height: 652px"> <!-- set desired position and size to that div -->
+        <canvas id="mycanvas" style="width: 100%; height: 100%;"></canvas>
+    </div>
+
+    <button id="btn">测试按钮</button>
+
+    <script src="img-touch-canvas.js"></script>
+    <script src="interact.js"></script>
+    <script>
+        var canvas =  document.getElementById('mycanvas');
+        var ctx = canvas.getContext('2d');
+        // ctx.globalCompositeOperation = 'destination-over';
+        // ctx.globalCompositeOperation = 'source-over';
+
+
+        var gesturableImg = new ImgTouchCanvas({
+            canvas: canvas,
+            path: "trollface.png",
+            desktop: true,
+            // destination: "./",
+            // compositionType: 'source-over'
+            compositionType: 'destination-over'
+        });
+
+        var index = 1;
+        document.getElementById("btn").onclick = function (ev) {
+            // var index = Math.ceil( 5 * Math.random() );
+            var url = "./mask" + index + ".png";
+            index++;
+            if (index > 5){
+                index = 1;
+            }
+            gesturableImg.setMask(url);
+        }
+
+        var angle = 0;
+        /*
+        interact(canvas)
+            .gesturable({
+                onstart: function (event) {
+                    console.log(event);
+                },
+                onmove: function (event) {
+                    console.log(event);
+                    angle += event.da;
+
+                    var deg =  angle * Math.PI / 180;
+                    gesturableImg.setAngle(deg);
+
+                    console.log(angle);
+                    // var arrow = document.getElementById('arrow');
+                    //
+                    // angle += event.da;
+                    //
+                    // arrow.style.webkitTransform =
+                    //     arrow.style.transform =
+                    //         'rotate(' + angle + 'deg)';
+                    //
+                    // document.getElementById('angle-info').textContent =
+                    //     angle.toFixed(2) + '&Acirc;&deg;';
+                },
+
+                onend: function (event) {
+                    console.log(event);
+
+                    console.log(angle);
+                }
+            })
+
+        ;
+        */
+
+
+    </script>
+</body>
+</html>
